@@ -12,8 +12,8 @@ VOLUME ["/root/Backup/logs"]
 
 # Copy App
 COPY . /root/Backup
-RUN cd /Backup; bundle install
-WORKDIR /Backup
+RUN cd /root/Backup; bundle install
+WORKDIR /root/Backup
 
 COPY bin/docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
