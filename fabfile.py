@@ -37,7 +37,7 @@ def run_container():
          "-v %(BACKUP_DIR)s:/data/ "
          "--name %(CONTAINER_NAME)s "
          "--link %(DATABASE_CONTAINER)s:%(DATABASE_TARGET_HOST)s "
-         "--env-file=[%(ENV_FILE)s] "
+         "--env-file=%(ENV_FILE)s "
          "%(IMAGE_NAME)s" % globals(), user=USER)
     print fabric.colors.green("Started Docker Backup container...")
 
