@@ -12,6 +12,7 @@ VOLUME ["/root/Backup/logs"]
 
 # Copy App
 COPY . /root/Backup
+RUN cd /root/Backup; gem install http_parser.rb
 RUN cd /root/Backup; bundle install
 WORKDIR /root/Backup
 
