@@ -8,13 +8,11 @@ COPY ./crontab /etc/crontab
 RUN touch /var/log/cron.log
 
 # Volumes - backup gem defaults location is ~/Backup/
-VOLUME ["/root/Backup/logs"]
+VOLUME ["/data", "/root/Backup/logs"]
 
 # Copy App
 COPY . /root/Backup
-RUN cd /root/Backup; gem install http_parser.rb
-RUN cd /root/Backup; gem install unf_ext -v '0.0.6'
-RUN cd /root/Backup; bundle install
+RUN cd /root/Backup; gem install http_parser.rb; gem install unf_ext -v '0.0.6'; bundle install
 WORKDIR /root/Backup
 
 COPY bin/docker-entrypoint.sh /
