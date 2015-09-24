@@ -1,7 +1,7 @@
-# simple docker container backup using backup gem https://github.com/backup/backup
+# simple docker container backup using [backup gem](https://github.com/backup/backup)
 
-The purpose of this repo is to facilitate backups for docker containers.
-It is possible to backup files and databases linked via docker --link .
+The purpose of this repo is to facilitate backups for docker containers.  
+It is possible to backup files and databases linked via docker --link .  
 ```fabric``` is used to manage the deployment of the container. Whereas it is
 a neat way using ```fabric```, it is not mandatory to use it.
 
@@ -9,14 +9,14 @@ a neat way using ```fabric```, it is not mandatory to use it.
 
 Fabric settings
 
-USER # the server user with which we will execute the cmds
-REPO_DIR # the directory in which we will pull the repo from
-BACKUP_DIR # folder to backup
-DATABASE_CONTAINER # name of the database container
-DATABASE_TARGET_HOST # host to map DATABASE_CONTAINER to
-ENV_FILE # file for environment variables. will be provided to the container
-IMAGE_NAME # the name of the docker image to be created
-CONTAINER_NAME = # the name of the docker container to be created
+    USER   # the server user with which we will execute the cmds  
+    REPO_DIR   # the directory in which we will pull the repo from  
+    BACKUP_DIR   # folder to backup  
+    DATABASE_CONTAINER   # name of the database container  
+    DATABASE_TARGET_HOST   # host to map DATABASE_CONTAINER to  
+    ENV_FILE   # file for environment variables. will be provided to the container  
+    IMAGE_NAME   # the name of the docker image to be created  
+    CONTAINER_NAME   # the name of the docker container to be created  
 
 
 # Using fabric
@@ -24,7 +24,7 @@ CONTAINER_NAME = # the name of the docker container to be created
 ```pip install Fabric```
 
 1. modify the fabfile to suit your requirements
-2. setup the backup in models/default.rb
+2. setup the backup in models/default.rb following the [docs](http://meskyanichi.github.io/backup/v4/getting-started/)
 3. setup the repo on the server in REPO_DIR
 4. fab deploy
 
@@ -32,10 +32,7 @@ CONTAINER_NAME = # the name of the docker container to be created
 
 # Not using fabric
 
-
-
-
-
+TODO
 
 
 
