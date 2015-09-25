@@ -12,7 +12,7 @@ VOLUME ["/data", "/root/Backup/logs"]
 
 # Copy App
 COPY . /root/Backup
-RUN cd /root/Backup; gem install http_parser.rb; gem install unf_ext -v '0.0.6'; bundle install
+RUN cd /root/Backup && gem install nokogiri && gem install http_parser.rb && gem install unf_ext -v '0.0.6'  && bundle install
 WORKDIR /root/Backup
 
 COPY bin/docker-entrypoint.sh /
