@@ -1,7 +1,9 @@
 # simple docker container backup using [backup gem](https://github.com/backup/backup)
 
 The purpose of this repo is to facilitate backups for docker containers.  
-It is possible to backup files and databases linked via docker --link .
+It is a reusable docker container backup utility for multi docker container setups.
+Out of the box it provides the possibility to backup files and databases linked via docker --link.
+Extending it to include other backups is easy - just setup a new backup model in /models and adjust the docker entrypoint to include the model.
 
 ## Setup Backup
 
@@ -34,7 +36,6 @@ Environment File
     BACKUP_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/yourwebhookurl   # the webhook_url
     BACKUP_SLACK_CHANNEL=theslackchannel   # the channel to which the message will be sent
     BACKUP_SLACK_ICON_EMOJI=:ghost:   # icon emoji is used to post the message to slack
-    # DATABASE
 
     # S3
     BACKUP_S3_ACCESS_KEY_ID=my_access_key_id
