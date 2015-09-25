@@ -7,33 +7,21 @@ a neat way using ```fabric```, it is not mandatory to use it.
 
 ## Setup Backup
 
-Fabric settings
+1. setup the backup in models/default.rb following the [docs](http://meskyanichi.github.io/backup/v4/getting-started/)
+2. Deploy repo: Copy it to your server or pull it from your code repository  
+3. cd into repo and build the image: ```docker build -t simpleloop-backup .```
+4. Setup your environment variables file as mentioned below
+5. run the container:
 
-    USER   # the server user with which we will execute the cmds  
-    REPO_DIR   # the directory in which we will pull the repo from  
-    BACKUP_DIR   # folder to backup  
-    DATABASE_CONTAINER   # name of the database container  
-    DATABASE_TARGET_HOST   # host to map DATABASE_CONTAINER to  
-    ENV_FILE   # file for environment variables. will be provided to the container  
-    IMAGE_NAME   # the name of the docker image to be created  
-    CONTAINER_NAME   # the name of the docker container to be created  
+```docker run --rm -v <path-to-backup>:/data/ --name <container-name> --link <db-container-name>:<map-db-host-name> --env-file=<the-env-variables-file> <image-name>```
+```docker run --rm -v /srv/simpleloop.com/media/:/data/ --name simpleloop-backup --link postgres_simpleloop:postgres --env-file=/srv/simpleloop.com/.bashrc simpleloop-backup```
 
 
-# Using fabric
+Environment File
 
-```pip install Fabric```
-
-1. modify the fabfile to suit your requirements
-2. setup the backup in models/default.rb following the [docs](http://meskyanichi.github.io/backup/v4/getting-started/)
-3. setup the repo on the server in REPO_DIR
-4. fab deploy
-
-
-
-# Not using fabric
-
-TODO
-
+    BACKUP_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/yourwebhookurl
+    BACKUP_SLACK_CHANNEL=theslackchannel
+    BACKUP_SLACK_ICON_EMOJI=:ghost:   # icon emoji is used to post the message to slack
 
 
 ## CREDITS
