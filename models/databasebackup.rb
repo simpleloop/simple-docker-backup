@@ -7,11 +7,6 @@ Model.new(:databasebackup, ENV["BACKUP_NAME_DATABASE"]) do
     db.password           = ENV["BACKUP_POSTGRES_PASSWORD"]
     db.host               = ENV["BACKUP_POSTGRES_HOST_NAME"]
     db.port               = ENV["BACKUP_POSTGRES_DATABASE_PORT"]
-    # db.socket             = "/tmp/pg.sock"
-    # db.additional_options = ["-xc", "-E=utf8"]
-    # Optional: Use to set the location of this utility
-    #   if it cannot be found by name in your $PATH
-    # db.pg_dump_utility = "/opt/local/bin/pg_dump"
   end
 
   ##

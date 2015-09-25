@@ -1,8 +1,8 @@
 # encoding: utf-8
 
 Model.new(:filebackup, ENV["BACKUP_NAME_FILES"]) do
-  # lets archive the data in /data
-  # /data has been mounted by docker using -v %(BACKUP_DIR)s:/data/
+  ##
+  # Create an archive using the data that has been mounted by docker using -v BACKUP_DIR:/data/
   archive :data do |archive|
     archive.add ENV["BACKUP_DATA_MOUNT_VOLUME"]
   end
