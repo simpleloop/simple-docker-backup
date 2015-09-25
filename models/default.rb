@@ -36,6 +36,12 @@ Model.new(:default, ENV["BACKUP_NAME"]) do
     archive.add "/data"   # docker mounted the folders to backup to /data
   end
 
+  encrypt_with OpenSSL do |encryption|
+    encryption.password = 'my_password'
+    encryption.base64   = true
+    encryption.salt     = true
+  end
+
   ##
   # Amazon Simple Storage Service [Storage]
   #store_with S3 do |s3|
@@ -82,7 +88,7 @@ Model.new(:default, ENV["BACKUP_NAME"]) do
 
     # The integration token
     slack.webhook_url = ENV["BACKUP_SLACK_WEBHOOK_URL"]   # the webhook_url
-    slack.username = ENV["BACKUP_SLACK_WEBHOOK_URL"]   # the username to display along with the notification
+    slack.username = ENV["BACKUP_SLACK_USERNAME"]   # the username to display along with the notification
     slack.channel = ENV["BACKUP_SLACK_CHANNEL"]   # the channel to which the message will be sent
     slack.icon_emoji = ENV["BACKUP_SLACK_ICON_EMOJI"]   # the emoji icon to use for notifications
   end
