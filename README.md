@@ -2,7 +2,7 @@
 
 The purpose of this repo is to facilitate backups for docker containers.  
 It is a reusable docker container backup utility for multi docker container setups.
-Out of the box it provides the possibility to backup files and databases linked via docker --link.
+Out of the box it provides the possibility to backup files and databases linked via docker --link.  
 Extending it to include other backups is easy - just setup a new backup model in /models and adjust the docker entrypoint to include the model.
 
 ## Setup Backup
@@ -25,12 +25,14 @@ Environment File
     BACKUP_NAME_DATABASE=thenameforthedatabasebackup   # The name of the database backup
     BACKUP_DATA_MOUNT_VOLUME=/data    # folder that contains the data to backup in the container mounted via -v /backup/dir:/data/
     BACKUP_ENCRYPTION_PASSWORD=thebackuppassword   # backups are encrypted using openssl
+
     # POSTGRES
     BACKUP_POSTGRES_DATABASE_NAME=thedatabasename    # the database name of the database to backup
     BACKUP_POSTGRES_USER_NAME=dbusername   # the database user name
     BACKUP_POSTGRES_PASSWORD=dbpassword   # the password to access the database
     BACKUP_POSTGRES_HOST_NAME=postgres   # the hostname as used in docker --link
     BACKUP_POSTGRES_DATABASE_PORT=5432    # the port of the database
+
     # SLACK
     BACKUP_SLACK_USERNAME=backupuser    # The username to display along with the notification
     BACKUP_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/yourwebhookurl   # the webhook_url
@@ -44,8 +46,6 @@ Environment File
     BACKUP_S3_BUCKET=bucket-name
     BACKUP_S3_BUCKET_PATH=path/to/backups
     BACKUP_S3_KEEP=7   # how many old backups to keep
-
-
 
 
 ## Schedule Backup
