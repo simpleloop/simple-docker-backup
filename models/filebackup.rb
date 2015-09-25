@@ -9,7 +9,7 @@
 # For more information about Backup's components, see the documentation at:
 # http://meskyanichi.github.io/backup
 #
-Model.new(:default, ENV["BACKUP_NAME"]) do
+Model.new(:filebackup, ENV["BACKUP_NAME"]) do
   ##
   # Archive [Archive]
   #
