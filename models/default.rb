@@ -43,8 +43,6 @@ Model.new(:default, ENV["BACKUP_NAME"]) do
 
   encrypt_with OpenSSL do |encryption|
     encryption.password = ENV["BACKUP_ENCRYPTION_PASSWORD"]
-    encryption.base64   = true
-    encryption.salt     = true
   end
 
   ##
