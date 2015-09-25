@@ -2,7 +2,7 @@ FROM ruby:2.2.2
 
 # install packages
 RUN apt-get update && \
-    apt-get install -y ruby-dev vim && \
+    apt-get install -y ruby-dev vim postgresql-client && \
     rm -rf /var/lib/apt/lists/*
 
 # Volumes - data to backup will be mapped to /data
