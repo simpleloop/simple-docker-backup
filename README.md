@@ -11,7 +11,7 @@ a neat way using ```fabric```, it is not mandatory to use it.
 2. Deploy repo: Copy it to your server or pull it from your code repository  
 3. cd into repo and build the image: ```docker build -t simpleloop-backup .```
 4. Setup your environment variables file as mentioned below
-5. run the container:
+5. now run the container to execute your backup:
 
 ```docker run --rm -v <path-to-backup>:/data/ --name <container-name> --link <db-container-name>:<map-db-host-name> --env-file=<the-env-variables-file> <image-name>```
 ```docker run --rm -v /srv/simpleloop.com/media/:/data/ --name simpleloop-backup --link postgres_simpleloop:postgres --env-file=/srv/simpleloop.com/.bashrc simpleloop-backup```
@@ -19,15 +19,30 @@ a neat way using ```fabric```, it is not mandatory to use it.
 
 Environment File
 
-    BACKUP_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/yourwebhookurl
-    BACKUP_SLACK_CHANNEL=theslackchannel
+    BACKUP_NAME=thenameforthebackup   # The name of the backup
+    BACKUP_SLACK_USERNAME=backupuser    # The username to display along with the notification
+    BACKUP_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/yourwebhookurl   # the webhook_url
+    BACKUP_SLACK_CHANNEL=theslackchannel   # the channel to which the message will be sent
     BACKUP_SLACK_ICON_EMOJI=:ghost:   # icon emoji is used to post the message to slack
+
+
+## Schedule Backup
+
+Create a job on your host system to run regularly. This can be the scheduler app of your choice. For example cron, [whenever gem](https://github.com/javan/whenever), anacron or similar.
+
+This job should execute the command to run the backup container on regular intervals. Example:
+A cronjob running everyday at 1:15 am:
+
+```
+15 1 * * * docker run --rm -v <path-to-backup>:/data/ --name <container-name> --link <db-container-name>:<map-db-host-name> --env-file=<the-env-variables-file>
+```
 
 
 ## CREDITS
 
 Credits to https://github.com/siuying/docker-backup as this repo is greatly inspired by docker-backup and
-adapted to suit our needs.
+adapted to suit our needs. Especially we got rid of crontab and are focusing to build up a container that
+can be used in multi-container environemnts.
 
 
 ## LICENSE

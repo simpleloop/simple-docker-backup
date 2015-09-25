@@ -9,7 +9,7 @@
 # For more information about Backup's components, see the documentation at:
 # http://meskyanichi.github.io/backup
 #
-Model.new(:default, 'Default Backup') do
+Model.new(:default, ENV["BACKUP_NAME"]) do
   ##
   # Archive [Archive]
   #
@@ -81,9 +81,10 @@ Model.new(:default, 'Default Backup') do
     slack.on_failure = true
 
     # The integration token
-    slack.webhook_url = ENV["BACKUP_SLACK_WEBHOOK_URL"]
-    slack.channel = ENV["BACKUP_SLACK_CHANNEL"]
-    slack.icon_emoji = ENV["BACKUP_SLACK_ICON_EMOJI"]
+    slack.webhook_url = ENV["BACKUP_SLACK_WEBHOOK_URL"]   # the webhook_url
+    slack.username = ENV["BACKUP_SLACK_WEBHOOK_URL"]   # the username to display along with the notification
+    slack.channel = ENV["BACKUP_SLACK_CHANNEL"]   # the channel to which the message will be sent
+    slack.icon_emoji = ENV["BACKUP_SLACK_ICON_EMOJI"]   # the emoji icon to use for notifications
   end
 
 end
