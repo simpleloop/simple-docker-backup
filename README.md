@@ -1,9 +1,7 @@
 # simple docker container backup using [backup gem](https://github.com/backup/backup)
 
 The purpose of this repo is to facilitate backups for docker containers.  
-It is possible to backup files and databases linked via docker --link .  
-```fabric``` is used to manage the deployment of the container. Whereas it is
-a neat way using ```fabric```, it is not mandatory to use it.
+It is possible to backup files and databases linked via docker --link .
 
 ## Setup Backup
 
@@ -11,19 +9,29 @@ a neat way using ```fabric```, it is not mandatory to use it.
 2. Deploy repo: Copy it to your server or pull it from your code repository  
 3. cd into repo and build the image: ```docker build -t simpleloop-backup .```
 4. Setup your environment variables file as mentioned below
-5. now run the container to execute your backup:
+5. now run the container to execute your backup manually:
 
-```docker run --rm -v <path-to-backup>:/data/ --name <container-name> --link <db-container-name>:<map-db-host-name> --env-file=<the-env-variables-file> <image-name>```
-```docker run --rm -v /srv/simpleloop.com/media/:/data/ --name simpleloop-backup --link postgres_simpleloop:postgres --env-file=/srv/simpleloop.com/.bashrc simpleloop-backup```
+```
+docker run --rm -v <path-to-backup>:/data/ --name <container-name> --link <db-container-name>:<map-db-host-name> --env-file=<the-env-variables-file> <image-name>  
+docker run --rm -v /srv/simpleloop.com/media/:/data/ --name simpleloop-backup --link postgres_simpleloop:postgres --env-file=/srv/simpleloop.com/.bashrc simpleloop-backup
+```
 
 
 Environment File
 
     BACKUP_NAME=thenameforthebackup   # The name of the backup
+    # SLACK
     BACKUP_SLACK_USERNAME=backupuser    # The username to display along with the notification
     BACKUP_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/yourwebhookurl   # the webhook_url
     BACKUP_SLACK_CHANNEL=theslackchannel   # the channel to which the message will be sent
     BACKUP_SLACK_ICON_EMOJI=:ghost:   # icon emoji is used to post the message to slack
+    # DATABASE
+
+    # ENCRYPTION KEY
+
+    # S3
+
+
 
 
 ## Schedule Backup
