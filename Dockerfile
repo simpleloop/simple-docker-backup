@@ -2,7 +2,7 @@ FROM ruby:2.2.2
 
 # setup crontab
 RUN apt-get update && \
-    apt-get install -y cron rsyslog rsync ruby-dev && \
+    apt-get install -y cron rsyslog rsync ruby-dev vim && \
     rm -rf /var/lib/apt/lists/*
 COPY ./crontab /etc/crontab
 RUN touch /var/log/cron.log
