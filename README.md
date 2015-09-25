@@ -20,6 +20,7 @@ docker run --rm -v /srv/simpleloop.com/media/:/data/ --name simpleloop-backup --
 Environment File
 
     BACKUP_NAME=thenameforthebackup   # The name of the backup
+    BACKUP_DATA_MOUNT_VOLUME=/data    # folder that contains the data to backup in the container mounted via -v /backup/dir:/data/
     BACKUP_ENCRYPTION_PASSWORD=thebackuppassword   # backups are encrypted using openssl
     # SLACK
     BACKUP_SLACK_USERNAME=backupuser    # The username to display along with the notification

@@ -33,8 +33,13 @@ Model.new(:default, ENV["BACKUP_NAME"]) do
   # lets archive the data in /data
   # /data has been mounted by docker using -v %(BACKUP_DIR)s:/data/
   archive :data do |archive|
-    archive.add "/data"   # docker mounted the folders to backup to /data
+    archive.add ENV["BACKUP_DATA_MOUNT_VOLUME"]
   end
+
+  ##
+  # Gzip [Compressor]
+  #
+  compress_with Gzip
 
   encrypt_with OpenSSL do |encryption|
     encryption.password = ENV["BACKUP_ENCRYPTION_PASSWORD"]
@@ -53,10 +58,17 @@ Model.new(:default, ENV["BACKUP_NAME"]) do
      s3.keep              = ENV["BACKUP_S3_KEEP"] ? ENV["BACKUP_S3_KEEP"].to_i : 5
   end
 
-  ##
-  # Gzip [Compressor]
-  #
-  compress_with Gzip
+  notify_by Slack do |slack|
+    slack.on_success = true
+    slack.on_warning = true
+    slack.on_failure = true
+
+    # The integration token
+    slack.webhook_url = ENV["BACKUP_SLACK_WEBHOOK_URL"]   # the webhook_url
+    slack.username = ENV["BACKUP_SLACK_USERNAME"]   # the username to display along with the notification
+    slack.channel = ENV["BACKUP_SLACK_CHANNEL"]   # the channel to which the message will be sent
+    slack.icon_emoji = ENV["BACKUP_SLACK_ICON_EMOJI"]   # the emoji icon to use for notifications
+  end
 
   ##
   # Mail [Notifier]
@@ -79,17 +91,5 @@ Model.new(:default, ENV["BACKUP_NAME"]) do
   #  mail.authentication       = "plain"
   #  mail.encryption           = :starttls
   #end
-
-  notify_by Slack do |slack|
-    slack.on_success = true
-    slack.on_warning = true
-    slack.on_failure = true
-
-    # The integration token
-    slack.webhook_url = ENV["BACKUP_SLACK_WEBHOOK_URL"]   # the webhook_url
-    slack.username = ENV["BACKUP_SLACK_USERNAME"]   # the username to display along with the notification
-    slack.channel = ENV["BACKUP_SLACK_CHANNEL"]   # the channel to which the message will be sent
-    slack.icon_emoji = ENV["BACKUP_SLACK_ICON_EMOJI"]   # the emoji icon to use for notifications
-  end
 
 end
