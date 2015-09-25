@@ -28,9 +28,13 @@ Environment File
     BACKUP_SLACK_ICON_EMOJI=:ghost:   # icon emoji is used to post the message to slack
     # DATABASE
 
-    # ENCRYPTION KEY
-
     # S3
+    BACKUP_S3_ACCESS_KEY_ID=my_access_key_id
+    BACKUP_S3_SECRET_ACCESS_KEY=my_secret_access_key
+    BACKUP_S3_REGION=eu-west-1
+    BACKUP_S3_BUCKET=bucket-name
+    BACKUP_S3_BUCKET_PATH=path/to/backups  #
+    BACKUP_S3_KEEP=7   # how many old backups to keep
 
 
 
