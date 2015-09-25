@@ -1,10 +1,17 @@
 # encoding: utf-8
 
-Model.new(:filebackup, ENV["BACKUP_NAME_FILES"]) do
-  # lets archive the data in /data
-  # /data has been mounted by docker using -v %(BACKUP_DIR)s:/data/
-  archive :data do |archive|
-    archive.add ENV["BACKUP_DATA_MOUNT_VOLUME"]
+Model.new(:databasebackup, ENV["BACKUP_NAME_DATABASE"]) do
+  database PostgreSQL do |db|
+    db.name               = ENV["BACKUP_POSTGRES_DATABASE_NAME"]
+    db.username           = ENV["BACKUP_POSTGRES_USER_NAME"]
+    db.password           = ENV["BACKUP_POSTGRES_PASSWORD"]
+    db.host               = ENV["BACKUP_POSTGRES_HOST_NAME"]
+    db.port               = ENV["BACKUP_POSTGRES_DATABASE_PORT"]
+    # db.socket             = "/tmp/pg.sock"
+    # db.additional_options = ["-xc", "-E=utf8"]
+    # Optional: Use to set the location of this utility
+    #   if it cannot be found by name in your $PATH
+    # db.pg_dump_utility = "/opt/local/bin/pg_dump"
   end
 
   ##
@@ -38,27 +45,5 @@ Model.new(:filebackup, ENV["BACKUP_NAME_FILES"]) do
     slack.channel = ENV["BACKUP_SLACK_CHANNEL"]   # the channel to which the message will be sent
     slack.icon_emoji = ENV["BACKUP_SLACK_ICON_EMOJI"]   # the emoji icon to use for notifications
   end
-
-  ##
-  # Mail [Notifier]
-  #
-  # The default delivery method for Mail Notifiers is 'SMTP'.
-  # See the documentation for other delivery options.
-  #
-  #notify_by Mail do |mail|
-  #  mail.on_success           = true
-  #  mail.on_warning           = true
-  #  mail.on_failure           = true
-
-  #  mail.from                 = "sender@email.com"
-  #  mail.to                   = "receiver@email.com"
-  #  mail.address              = "smtp.gmail.com"
-  #  mail.port                 = 587
-  #  mail.domain               = "your.host.name"
-  #  mail.user_name            = "sender@email.com"
-  #  mail.password             = "my_password"
-  #  mail.authentication       = "plain"
-  #  mail.encryption           = :starttls
-  #end
 
 end

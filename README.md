@@ -19,9 +19,16 @@ docker run --rm -v /srv/simpleloop.com/media/:/data/ --name simpleloop-backup --
 
 Environment File
 
-    BACKUP_NAME=thenameforthebackup   # The name of the backup
+    BACKUP_NAME_FILES=thenameforthefilesbackup   # The name of the files backup
+    BACKUP_NAME_DATABASE=thenameforthedatabasebackup   # The name of the database backup
     BACKUP_DATA_MOUNT_VOLUME=/data    # folder that contains the data to backup in the container mounted via -v /backup/dir:/data/
     BACKUP_ENCRYPTION_PASSWORD=thebackuppassword   # backups are encrypted using openssl
+    # POSTGRES
+    BACKUP_POSTGRES_DATABASE_NAME=thedatabasename    # the database name of the database to backup
+    BACKUP_POSTGRES_USER_NAME=dbusername   # the database user name
+    BACKUP_POSTGRES_PASSWORD=dbpassword   # the password to access the database
+    BACKUP_POSTGRES_HOST_NAME=postgres   # the hostname as used in docker --link
+    BACKUP_POSTGRES_DATABASE_PORT=5432    # the port of the database
     # SLACK
     BACKUP_SLACK_USERNAME=backupuser    # The username to display along with the notification
     BACKUP_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/yourwebhookurl   # the webhook_url
@@ -34,7 +41,7 @@ Environment File
     BACKUP_S3_SECRET_ACCESS_KEY=my_secret_access_key
     BACKUP_S3_REGION=eu-west-1
     BACKUP_S3_BUCKET=bucket-name
-    BACKUP_S3_BUCKET_PATH=path/to/backups  #
+    BACKUP_S3_BUCKET_PATH=path/to/backups
     BACKUP_S3_KEEP=7   # how many old backups to keep
 
 
@@ -61,10 +68,8 @@ can be used in multi-container environemnts.
 
 ## LICENSE
 
-The MIT License
-===============
-
-Copyright (c) 2009-2014 Stuart Knightley, David Duponchel, Franz Buchinger, António Afonso
+Released under the MIT License
+==============================
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
