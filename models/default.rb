@@ -37,22 +37,21 @@ Model.new(:default, ENV["BACKUP_NAME"]) do
   end
 
   encrypt_with OpenSSL do |encryption|
-    encryption.password = 'my_password'
+    encryption.password = ENV["BACKUP_ENCRYPTION_PASSWORD"]
     encryption.base64   = true
     encryption.salt     = true
   end
 
   ##
   # Amazon Simple Storage Service [Storage]
-  #store_with S3 do |s3|
-  #   s3.access_key_id     = ENV["BACKUP_S3_ACCESS_KEY_ID"]
-  #   s3.secret_access_key = ENV["BACKUP_S3_SECRET_ACCESS_KEY"]
-  #   s3.region            = ENV["BACKUP_S3_REGION"]
-  #   s3.bucket            = ENV["BACKUP_S3_BUCKET"]
-  #   s3.path              = ENV["BACKUP_S3_BUCKET_PATH"]
-  #   s3.keep              = ENV["BACKUP_S3_KEEP"] ? ENV["BACKUP_S3_KEEP"].to_i : 5
-  #   s3.trunk_size        = ENV["BACKUP_S3_TRUNKSIZE"]  ? ENV["BACKUP_S3_TRUNKSIZE"].to_i 5
-  #end
+  store_with S3 do |s3|
+     s3.access_key_id     = ENV["BACKUP_S3_ACCESS_KEY_ID"]
+     s3.secret_access_key = ENV["BACKUP_S3_SECRET_ACCESS_KEY"]
+     s3.region            = ENV["BACKUP_S3_REGION"]
+     s3.bucket            = ENV["BACKUP_S3_BUCKET"]
+     s3.path              = ENV["BACKUP_S3_BUCKET_PATH"]
+     s3.keep              = ENV["BACKUP_S3_KEEP"] ? ENV["BACKUP_S3_KEEP"].to_i : 5
+  end
 
   ##
   # Gzip [Compressor]
