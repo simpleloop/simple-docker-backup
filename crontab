@@ -1,2 +1,0 @@
-# Example: Run 'default' backup every 01:15am
-* * * * * /bin/bash -l -c 'bundle exec backup perform -t default'

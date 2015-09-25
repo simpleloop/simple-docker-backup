@@ -1,14 +1,12 @@
 FROM ruby:2.2.2
 
-# setup crontab
+# install packages
 RUN apt-get update && \
-    apt-get install -y cron rsyslog rsync ruby-dev vim && \
+    apt-get install -y ruby-dev vim && \
     rm -rf /var/lib/apt/lists/*
-COPY ./crontab /etc/crontab
-RUN touch /var/log/cron.log
 
-# Volumes - backup gem defaults location is ~/Backup/
-VOLUME ["/data", "/root/Backup/logs"]
+# Volumes - data to backup will be mapped to /data
+VOLUME ["/data"]
 
 # Copy App
 COPY . /root/Backup
