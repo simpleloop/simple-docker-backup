@@ -52,7 +52,7 @@ Environment File
 
 Create a job on your host system to run regularly. This can be the scheduler app of your choice. For example cron, [whenever gem](https://github.com/javan/whenever), anacron or similar.
 
-This job should execute the command to run the backup container on regular intervals. Example:
+This job should execute the command to run the backup container on regular intervals, and remove it as soon as the backup succeeded. Example:
 A cronjob running everyday at 1:15 am:
 
 ```
