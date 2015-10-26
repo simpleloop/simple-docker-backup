@@ -64,7 +64,7 @@ A cronjob running everyday at 1:15 am:
 
 Credits to https://github.com/siuying/docker-backup as this repo is greatly inspired by docker-backup and
 adapted to suit our needs. Especially we got rid of crontab and are focusing to build up a container that
-can be used in multi-container environemnts.
+can be used in multi-container environments.
 
 
 ## LICENSE
